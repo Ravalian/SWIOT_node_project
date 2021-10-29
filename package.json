@@ -1,0 +1,22 @@
+{
+  "name": "swiot_node_project",
+  "version": "1.0.0",
+  "description": "IOT_webserver",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ravalian/SWIOT_node_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ravalian/SWIOT_node_project/issues"
+  },
+  "homepage": "https://github.com/Ravalian/SWIOT_node_project#readme",
+  "dependencies": {
+    "http-status-codes": "^2.1.4"
+  }
+}
