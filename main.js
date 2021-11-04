@@ -10,7 +10,7 @@ const api = express()
 const HOST = 'localhost'
 const PORT = 8888;
 
-api.listen(PORT, () => console.log('API runnig at ${HOST}:${PORT}!'));
+api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
 api.get('/', (reg, res) => {
     res.send('Welcome to this API');
