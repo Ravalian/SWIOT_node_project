@@ -10,10 +10,23 @@ const api = express()
 const HOST = 'localhost'
 const PORT = 8888;
 
+const Gpio = require('onoff').Gpio;
+const led = new Gpio(20, 'out');
+
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
 api.get('/', (reg, res) => {
     res.send('Welcome to this API');
+})
+
+api.get('/turn_on', (reg, res) => {
+    led.writeSync(1);
+    res.send('Turning on LED');
+})
+
+api.get('/turn_off', (reg, res) => {
+    led.writeSync(0);
+    res.send('Turning off LED');
 })
 
 /*const app = http.createServer(
