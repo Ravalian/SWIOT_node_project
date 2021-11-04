@@ -1,10 +1,22 @@
 'use strict';
 const http = require( 'http' );
 const httpStatus = require( 'http-status-codes' );
+const express = require('express');
 
 const port = 4000;
 
-const app = http.createServer(
+const api = express()
+
+const HOST = 'localhost'
+const PORT = 8888;
+
+api.listen(PORT, () => console.log('API runnig at ${HOST}:${PORT}!'));
+
+api.length('/', (reg, res) => {
+    res.send('Welcome to this API');
+})
+
+/*const app = http.createServer(
         ( request, response ) => {console.log( 'Received an incoming request!' );
 
     response.writeHead( httpStatus.OK, {'Content-Type': 'text/html'} );
@@ -18,4 +30,4 @@ const app = http.createServer(
     } );
 
 app.listen( port );
-console.log( `The server has started and is listening on port number: ${port}` );
+console.log( `The server has started and is listening on port number: ${port}` );*/
