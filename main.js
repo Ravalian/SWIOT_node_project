@@ -12,7 +12,7 @@ const PORT = 8888;
 
 api.listen(PORT, () => console.log('API runnig at ${HOST}:${PORT}!'));
 
-api.length('/', (reg, res) => {
+api.get('/', (reg, res) => {
     res.send('Welcome to this API');
 })
 
