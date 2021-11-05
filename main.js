@@ -12,7 +12,7 @@ const PORT = 8888;
 
 const Gpio = require('onoff').Gpio;
 const led = new Gpio(20, 'out');
-const led1 = new Gpio(29, 'out');
+const led1 = new Gpio(21, 'out');
 
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
