@@ -52,9 +52,9 @@ api.post('/turn_on_led_from_api', (reg, res) => {
 })
 
 api.post('/turn_off_led_from_api', (reg, res) => {
-    led.writeSync(1);
-    led1.writeSync(1);
-    led2.writeSync(1);
+    led.writeSync(0);
+    led1.writeSync(0);
+    led2.writeSync(0);
     res.send("turned off led");
 })
 
