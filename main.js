@@ -6,12 +6,15 @@ const express = require('express');
 const port = 4000;
 
 const api = express()
+const api_2 = express()
 
 const HOST = 'localhost'
 const PORT = 8888;
 
 const Gpio = require('onoff').Gpio;
 const led = new Gpio(20, 'out');
+const led1 = new Gpio(21, 'out');
+const led2 = new Gpio(26, 'out');
 const motor = new Gpio(22, 'out');
 
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
@@ -40,6 +43,13 @@ api.get('/turn_on_motor', (reg, res) => {
 api.get('/turn_off_motor', (reg, res) => {
     motor.writeSync(0);
     res.send('Turning off motor');
+})
+
+api.post('/turn_on_led_from_api', (reg, res) => {
+    led.writeSync(1);
+    led1.writeSync(1);
+    led2.writeSync(2);
+    res.send("turned on led");
 })
 
 /*const app = http.createServer(

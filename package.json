@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Ravalian/SWIOT_node_project#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "http-status-codes": "^2.1.4"
   }
 }
