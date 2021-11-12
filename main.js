@@ -12,7 +12,7 @@ const PORT = 8888;
 
 const Gpio = require('onoff').Gpio;
 const led = new Gpio(20, 'out');
-const led1 = new Gpio(21, 'out');
+const motor = new Gpio(22, 'out');
 
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
@@ -22,14 +22,24 @@ api.get('/', (reg, res) => {
 
 api.get('/turn_on', (reg, res) => {
     led.writeSync(1);
-    led1.writeSync(1);
+
     res.send('Turning on LED');
 })
 
 api.get('/turn_off', (reg, res) => {
     led.writeSync(0);
-    led1.writeSync(0);
+
     res.send('Turning off LED');
+})
+
+api.get('/turn_on_motor', (reg, res) => {
+    motor.writeSync(1);
+    res.send('Turning on motor');
+})
+
+api.get('/turn_off_motor', (reg, res) => {
+    motor.writeSync(0);
+    res.send('Turning off motor');
 })
 
 /*const app = http.createServer(
