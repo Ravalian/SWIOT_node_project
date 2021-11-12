@@ -6,7 +6,6 @@ const express = require('express');
 const port = 4000;
 
 const api = express()
-const api_2 = express()
 
 const HOST = 'localhost'
 const PORT = 8888;
@@ -48,8 +47,15 @@ api.get('/turn_off_motor', (reg, res) => {
 api.post('/turn_on_led_from_api', (reg, res) => {
     led.writeSync(1);
     led1.writeSync(1);
-    led2.writeSync(2);
+    led2.writeSync(1);
     res.send("turned on led");
+})
+
+api.post('/turn_off_led_from_api', (reg, res) => {
+    led.writeSync(1);
+    led1.writeSync(1);
+    led2.writeSync(1);
+    res.send("turned off led");
 })
 
 /*const app = http.createServer(
