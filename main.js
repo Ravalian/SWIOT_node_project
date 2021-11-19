@@ -60,7 +60,7 @@ var isOn = false;
 
 api.get('/LED_on_off', (req, res) => {
     var LEDValue = piLED1.readSync();
-    console.log("Do this happen? is LED on: " + test );
+    console.log("Do this happen? is LED on: " + LEDValue);
     
     if(LEDValue = 0){
         piLED1.writeSync(1);
