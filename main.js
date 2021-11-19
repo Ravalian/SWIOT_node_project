@@ -18,40 +18,40 @@ const motor = new Gpio(22, 'out');
 
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
-api.get('/', (reg, res) => {
+api.get('/', (req, res) => {
     res.send('Welcome to this API');
 })
 
-api.get('/turn_on', (reg, res) => {
+api.get('/turn_on', (req, res) => {
     led.writeSync(1);
 
     res.send('Turning on LED');
 })
 
-api.get('/turn_off', (reg, res) => {
+api.get('/turn_off', (req, res) => {
     led.writeSync(0);
 
     res.send('Turning off LED');
 })
 
-api.get('/turn_on_motor', (reg, res) => {
+api.get('/turn_on_motor', (req, res) => {
     motor.writeSync(1);
     res.send('Turning on motor');
 })
 
-api.get('/turn_off_motor', (reg, res) => {
+api.get('/turn_off_motor', (req, res) => {
     motor.writeSync(0);
     res.send('Turning off motor');
 })
 
-api.post('/turn_on_led_from_api', (reg, res) => {
+api.post('/turn_on_led_from_api', (req, res) => {
     led.writeSync(1);
     led1.writeSync(1);
     led2.writeSync(1);
     res.send("turned on led");
 })
 
-api.post('/turn_off_led_from_api', (reg, res) => {
+api.post('/turn_off_led_from_api', (req, res) => {
     led.writeSync(0);
     led1.writeSync(0);
     led2.writeSync(0);
