@@ -22,16 +22,6 @@ api.get('/', (req, res) => {
     res.send('Welcome to this API');
 })
 
-api.get('/turn_on', (req, res) => {
-    piLED1.writeSync(1);
-    res.send('Turning on LED');
-})
-
-api.get('/turn_off', (req, res) => {
-    piLED1.writeSync(0);
-    res.send('Turning off LED');
-})
-
 api.get('/turn_on_motor', (req, res) => {
     motor.writeSync(1);
     res.send('Turning on motor');
@@ -42,21 +32,17 @@ api.get('/turn_off_motor', (req, res) => {
     res.send('Turning off motor');
 })
 
-api.post('/turn_on_led_from_api', (req, res) => {
-    piLED1.writeSync(1);
-    piLED2.writeSync(1);
-    piLED3.writeSync(1);
-    res.send("turned on led");
-})
+api.get('/MOTOR_on_off', (req, res) => {
+    var MotorValue = motor.readSync();
+    console.log("Do this happen? is LED on: " + MotorValue);
 
-api.post('/turn_off_led_from_api', (req, res) => {
-    piLED1.writeSync(0);
-    piLED2.writeSync(0);
-    piLED3.writeSync(0);
-    res.send("turned off led");
+    if(MotorValue == 0){
+        motor.writeSync(1);
+    }
+    else if(MotorValue == 1){
+        motor.writeSync(0);
+    }
 })
-
-var isOn = false;
 
 api.get('/LED_on_off', (req, res) => {
     var LEDValue = piLED1.readSync();
@@ -66,13 +52,11 @@ api.get('/LED_on_off', (req, res) => {
         piLED1.writeSync(1);
         piLED2.writeSync(1);
         piLED3.writeSync(1);
-        isOn = true;
     } 
     else if(LEDValue == 1){
         piLED1.writeSync(0);
         piLED2.writeSync(0);
         piLED3.writeSync(0);
-        isOn = false;
     }
     
     res.send("turned on led");
