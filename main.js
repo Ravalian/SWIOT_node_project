@@ -59,7 +59,8 @@ api.post('/turn_off_led_from_api', (req, res) => {
 var isOn = false;
 
 api.get('/LED_on_off', (req, res) => {
-    console.log("Do this happen?")
+    var test = piLED1.readSync();
+    console.log("Do this happen? is LED on: " + test );
     
     if(isOn = false){
         piLED1.writeSync(1);
