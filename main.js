@@ -66,7 +66,7 @@ api.get('/LED_on_off', (req, res) => {
         piLED3.writeSync(1);
         isOn = true;
     } 
-    else {
+    else if(isOn = true){
         piLED1.writeSync(0);
         piLED2.writeSync(0);
         piLED3.writeSync(0);
