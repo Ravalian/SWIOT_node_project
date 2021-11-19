@@ -62,13 +62,13 @@ api.get('/LED_on_off', (req, res) => {
     var LEDValue = piLED1.readSync();
     console.log("Do this happen? is LED on: " + LEDValue);
     
-    if(LEDValue = 0){
+    if(LEDValue == 0){
         piLED1.writeSync(1);
         piLED2.writeSync(1);
         piLED3.writeSync(1);
         isOn = true;
     } 
-    else if(LEDValue = 1){
+    else if(LEDValue == 1){
         piLED1.writeSync(0);
         piLED2.writeSync(0);
         piLED3.writeSync(0);
