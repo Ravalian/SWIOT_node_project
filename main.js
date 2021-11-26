@@ -22,6 +22,7 @@ const piLED2 = new Gpio(21, 'out');
 const piLED3 = new Gpio(26, 'out');
 const motor = new Gpio(22, 'out');
 const discoLED = new Gpio(24, 'out');
+const tempLED = new Gpio(27, 'out');
 
 //i2c - Temp sensor
 async function readtemp () {
@@ -32,15 +33,17 @@ async function readtemp () {
 
             if(i2c.readByteSync(0x48) >= 29){
                 piLED2.writeSync(1);
+                tempLED.writeSync(1);
             }
             else{
                 piLED2.writeSync(0);
+                tempLED.writeSync(0);                
             }
         });
         await sleep(1000);
     }
 }
-
+//Run function
 readtemp();
 
 //Front page
@@ -82,48 +85,9 @@ api.get('/Motor_on_off', (req, res) => {
     res.send("turned on led");
 })
 
-//Test methods - used to test functionality
-api.get('/turn_on_motor', (req, res) => {
-    motor.writeSync(1);
-    res.send('Turning on motor');
-})
-
-api.get('/turn_off_motor', (req, res) => {
-    motor.writeSync(0);
-    res.send('Turning off motor');
-})
-
-api.get('/MOTOR_on_off', (req, res) => {
-    var MotorValue = motor.readSync();
-    console.log("Do this happen? is LED on: " + MotorValue);
-
-    if(MotorValue == 0){
-        motor.writeSync(1);
-    }
-    else if(MotorValue == 1){
-        motor.writeSync(0);
-    }
-})
-
 //Sleep function
 function sleep (ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
 }
-
-/*const app = http.createServer(
-        ( request, response ) => {console.log( 'Received an incoming request!' );
-
-    response.writeHead( httpStatus.OK, {'Content-Type': 'text/html'} );
-
-    let responseMessage = '<h1>Hello World!</h1>';
-
-    response.write( responseMessage );
-    response.end();
-
-    console.log( `Sent a response : ${responseMessage}` );
-    } );
-
-app.listen( port );
-console.log( `The server has started and is listening on port number: ${port}` );*/
