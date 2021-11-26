@@ -4,9 +4,9 @@ const httpStatus = require( 'http-status-codes' );
 const express = require('express');
 const raspi = require('raspi');
 const I2C = require('raspi-i2c').I2C;
+const { resolve } = require('path');
 
-const port = 4000;
-
+//settings
 const api = express()
 
 const HOST = 'localhost'
@@ -16,10 +16,9 @@ api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
 //Gpio
 const Gpio = require('onoff').Gpio;
-const { resolve } = require('path');
-const piLED1 = new Gpio(20, 'out');
-const piLED2 = new Gpio(21, 'out');
-const piLED3 = new Gpio(26, 'out');
+const piLED1 = new Gpio(26, 'out');
+const piLED2 = new Gpio(20, 'out');
+const piLED3 = new Gpio(21, 'out');
 const motor = new Gpio(22, 'out');
 const discoLED = new Gpio(24, 'out');
 const tempLED = new Gpio(27, 'out');
