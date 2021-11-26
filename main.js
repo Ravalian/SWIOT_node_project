@@ -28,7 +28,7 @@ raspi.init(() => {
     const i2c = new I2C();
     while(true){
         console.log(i2c.readByteSync(0x48));
-        await sleep(1000);
+        sleep(1000);
     }
 })
 
