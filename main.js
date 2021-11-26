@@ -25,13 +25,13 @@ const discoLED = new Gpio(24, 'out');
 
 //i2c - Temp sensor
 async function readtemp () {
-    raspi.init(() => {
-        const i2c = new I2C();
-        while(true){
+    while(true){
+        raspi.init(() => {
+            const i2c = new I2C();
             console.log(i2c.readByteSync(0x48));
-            await sleep(1000);
-        }
-    })
+        });
+        await sleep(1000);
+    }
 }
 
 readtemp();
