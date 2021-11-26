@@ -15,13 +15,50 @@ const piLED1 = new Gpio(20, 'out');
 const piLED2 = new Gpio(21, 'out');
 const piLED3 = new Gpio(26, 'out');
 const motor = new Gpio(22, 'out');
+const discoLED = new Gpio(24, 'out');
 
 api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
+//Front page
 api.get('/', (req, res) => {
     res.send('Welcome to this API');
 })
 
+//LED Controller
+api.get('/LED_on_off', (req, res) => {
+    var LEDValue = piLED1.readSync();
+    console.log("Do this happen? is LED on: " + LEDValue);
+    
+    if(LEDValue == 0){
+        piLED1.writeSync(1);
+        discoLED.writeSync(1);
+    } 
+    else if(LEDValue == 1){
+        piLED1.writeSync(0);
+        discoLED.writeSync(1);
+    }
+    
+    res.send("turned on led");
+})
+
+//Motor Controller
+api.get('/Motor_on_off', (req, res) => {
+    var LEDValue = piLED3.readSync();
+    console.log("Do this happen? is LED on: " + LEDValue);
+    
+    if(LEDValue == 0){
+        piLED3.writeSync(1);
+        motor.writeSync(1);
+    } 
+    else if(LEDValue == 1){
+        piLED3.writeSync(0);
+        motor.writeSync(0);
+    }
+    
+    res.send("turned on led");
+})
+
+//Test methods - used to test functionality
 api.get('/turn_on_motor', (req, res) => {
     motor.writeSync(1);
     res.send('Turning on motor');
@@ -44,23 +81,7 @@ api.get('/MOTOR_on_off', (req, res) => {
     }
 })
 
-api.get('/LED_on_off', (req, res) => {
-    var LEDValue = piLED1.readSync();
-    console.log("Do this happen? is LED on: " + LEDValue);
-    
-    if(LEDValue == 0){
-        piLED1.writeSync(1);
-        piLED2.writeSync(1);
-        piLED3.writeSync(1);
-    } 
-    else if(LEDValue == 1){
-        piLED1.writeSync(0);
-        piLED2.writeSync(0);
-        piLED3.writeSync(0);
-    }
-    
-    res.send("turned on led");
-})
+
 
 /*const app = http.createServer(
         ( request, response ) => {console.log( 'Received an incoming request!' );
