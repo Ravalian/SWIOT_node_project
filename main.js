@@ -28,7 +28,7 @@ raspi.init(() => {
     const i2c = new I2C();
     while(true){
         console.log(i2c.readByteSync(0x48));
-        sleep(1000);
+        await sleep(1000);
     }
 })
 
@@ -95,7 +95,7 @@ api.get('/MOTOR_on_off', (req, res) => {
 })
 
 //Sleep function
-function sleep (ms) {
+async function sleep (ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
