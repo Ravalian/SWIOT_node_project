@@ -24,13 +24,17 @@ const motor = new Gpio(22, 'out');
 const discoLED = new Gpio(24, 'out');
 
 //i2c - Temp sensor
-raspi.init(() => {
-    const i2c = new I2C();
-    while(true){
-        console.log(i2c.readByteSync(0x48));
-        await sleep(1000);
-    }
-})
+async function readtemp () {
+    raspi.init(() => {
+        const i2c = new I2C();
+        while(true){
+            console.log(i2c.readByteSync(0x48));
+            await sleep(1000);
+        }
+    })
+}
+
+readtemp();
 
 //Front page
 api.get('/', (req, res) => {
@@ -95,7 +99,7 @@ api.get('/MOTOR_on_off', (req, res) => {
 })
 
 //Sleep function
-async function sleep (ms) {
+function sleep (ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
