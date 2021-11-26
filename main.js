@@ -29,6 +29,13 @@ async function readtemp () {
         raspi.init(() => {
             const i2c = new I2C();
             console.log(i2c.readByteSync(0x48));
+
+            if(i2c.readByteSync(0x48) >= 29){
+                piLED2.writeSync(1);
+            }
+            else{
+                piLED2.writeSync(0);
+            }
         });
         await sleep(1000);
     }
