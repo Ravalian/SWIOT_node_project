@@ -2,6 +2,8 @@
 const http = require( 'http' );
 const httpStatus = require( 'http-status-codes' );
 const express = require('express');
+const raspi = require('raspi');
+const I2C = require('raspi-i2c').I2C;
 
 const port = 4000;
 
@@ -10,6 +12,9 @@ const api = express()
 const HOST = 'localhost'
 const PORT = 8888;
 
+api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
+
+//Gpio
 const Gpio = require('onoff').Gpio;
 const piLED1 = new Gpio(20, 'out');
 const piLED2 = new Gpio(21, 'out');
@@ -17,7 +22,11 @@ const piLED3 = new Gpio(26, 'out');
 const motor = new Gpio(22, 'out');
 const discoLED = new Gpio(24, 'out');
 
-api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
+//i2c - Temp sensor
+raspi.init(() => {
+    const i2c = new I2C();
+    console.log(i2c.readByteSync(0x18));
+})
 
 //Front page
 api.get('/', (req, res) => {
