@@ -25,7 +25,7 @@ const discoLED = new Gpio(24, 'out');
 //i2c - Temp sensor
 raspi.init(() => {
     const i2c = new I2C();
-    console.log(i2c.readByteSync(0x18));
+    console.log(i2c.readByteSync(0x48));
 })
 
 //Front page
