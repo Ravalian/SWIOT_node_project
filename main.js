@@ -16,6 +16,7 @@ api.listen(PORT, () => console.log('API running at '+HOST+':'+PORT+'!'));
 
 //Gpio
 const Gpio = require('onoff').Gpio;
+const { resolve } = require('path');
 const piLED1 = new Gpio(20, 'out');
 const piLED2 = new Gpio(21, 'out');
 const piLED3 = new Gpio(26, 'out');
@@ -25,7 +26,10 @@ const discoLED = new Gpio(24, 'out');
 //i2c - Temp sensor
 raspi.init(() => {
     const i2c = new I2C();
-    console.log(i2c.readByteSync(0x48));
+    while(true){
+        console.log(i2c.readByteSync(0x48));
+        await sleep(1000);
+    }
 })
 
 //Front page
@@ -90,7 +94,12 @@ api.get('/MOTOR_on_off', (req, res) => {
     }
 })
 
-
+//Sleep function
+function sleep (ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
 
 /*const app = http.createServer(
         ( request, response ) => {console.log( 'Received an incoming request!' );
