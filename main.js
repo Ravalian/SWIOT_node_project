@@ -67,14 +67,16 @@ var temp_sensor = false;
 var On_off = false;
 
 api.get('/temp_sensor_on_off', (req, res) => {
-    if (On_off == false){
+    if (temp_sensor == false){
         On_off = true;
 
         temp_sensor = true;
+        res.send("Temp sensor LED turn on")
     }
-    else if (On_off == true){
+    else if (temp_sensor == true){
         On_off = false;
         temp_sensor = false;
+        res.send("Temp sensor LED turned off")
     }
 })
 
