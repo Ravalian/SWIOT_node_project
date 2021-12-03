@@ -97,6 +97,8 @@ async function readtemp () {
                 console.log("Temp_sensor LED turned on");
             }
             else {
+                piLED2.writeSync(0);
+                tempLED.writeSync(0);
                 console.log("Temp_sensor LED turned off");
             }
         });
