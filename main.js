@@ -23,6 +23,34 @@ const motor = new Gpio(22, 'out');
 const discoLED = new Gpio(24, 'out');
 const tempLED = new Gpio(27, 'out');
 
+//i2c - Temp sensor
+async function readtemp () {
+    while(true){
+        raspi.init(() => {
+            const i2c = new I2C();
+            console.log(i2c.readByteSync(0x48));
+
+            if(temp_sensor == true){
+                if(i2c.readByteSync(0x48) >= 29){
+                    piLED2.writeSync(1);
+                    tempLED.writeSync(1);
+                }
+                else{
+                    piLED2.writeSync(0);
+                    tempLED.writeSync(0);                
+                }
+                console.log("Temp_sensor LED turned on");
+            }
+            else {
+                console.log("Temp_sensor LED turned off");
+            }
+        });
+        await sleep(1000);
+    }
+}
+//Run function
+readtemp();
+
 //Front page
 api.get('/', (req, res) => {
     res.send('Welcome to this API');
@@ -77,33 +105,6 @@ api.get('/temp_sensor_on_off', (req, res) => {
         temp_sensor = false;
     }
 })
-
-//i2c - Temp sensor
-async function readtemp () {
-    while(true){
-        raspi.init(() => {
-            const i2c = new I2C();
-            console.log(i2c.readByteSync(0x48));
-
-            if(temp_sensor == true){
-                if(i2c.readByteSync(0x48) >= 29){
-                    piLED2.writeSync(1);
-                    tempLED.writeSync(1);
-                }
-                else{
-                    piLED2.writeSync(0);
-                    tempLED.writeSync(0);                
-                }
-            }
-            else {
-                console.log("Temp_sensor LED turned off");
-            }
-        });
-        await sleep(1000);
-    }
-}
-//Run function
-readtemp();
 
 //Sleep function
 function sleep (ms) {
