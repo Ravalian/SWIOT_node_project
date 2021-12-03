@@ -36,13 +36,13 @@ api.get('/LED_on_off', (req, res) => {
     if(LEDValue == 0){
         piLED1.writeSync(1);
         discoLED.writeSync(1);
+        res.send("Turned Disco_LED on");
     } 
     else if(LEDValue == 1){
         piLED1.writeSync(0);
-        discoLED.writeSync(1);
+        discoLED.writeSync(0);
+        res.send("Turned Disco_LED off");
     }
-    
-    res.send("turned on led");
 })
 
 //Motor Controls
@@ -53,28 +53,26 @@ api.get('/Motor_on_off', (req, res) => {
     if(LEDValue == 0){
         piLED3.writeSync(1);
         motor.writeSync(1);
+        res.send("Turned Motor on");
     } 
     else if(LEDValue == 1){
         piLED3.writeSync(0);
         motor.writeSync(0);
+        res.send("Turned Motor on");
     }
-    
-    res.send("turned on led");
 })
 
 //Temp sensor controls
 var temp_sensor = false;
-var On_off = false;
 
 api.get('/temp_sensor_on_off', (req, res) => {
-    if (temp_sensor == false){
-        On_off = true;
-
+    if (temp_sensor == false)
+    {
         temp_sensor = true;
         res.send("Temp sensor LED turn on")
     }
-    else if (temp_sensor == true){
-        On_off = false;
+    else if (temp_sensor == true)
+    {
         temp_sensor = false;
         res.send("Temp sensor LED turned off")
     }
